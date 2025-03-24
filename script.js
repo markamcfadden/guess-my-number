@@ -12,13 +12,17 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector(".message").textContent = "⛔ No number guessed!";
   } else if (guess === secretNumber) {
     document.querySelector(".message").textContent = "🎉 Correct Number!";
-  } else if (guess > secretNumber) {
-    document.querySelector(".message").textContent = "📈  Guess too high!";
+  } else if (guess > secretNumber || guess < secretNumber) {
     score--;
     document.querySelector(".score").textContent = score;
-  } else if (guess < secretNumber) {
-    document.querySelector(".message").textContent = "📉 Guess too low!";
-    score--;
-    document.querySelector(".score").textContent = score;
+    if (score > 0) {
+      if (guess > secretNumber) {
+        document.querySelector(".message").textContent = "📈 Guess too high!";
+      } else if (score < secretNumber) {
+        document.querySelector(".message").textContent = "📉 Guess too low!";
+      }
+    } else {
+      document.querySelector(".message").textContent = "Game over!";
+    }
   }
 });
